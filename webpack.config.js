@@ -34,7 +34,8 @@ module.exports = {
     // a webpack dev server  such as live server
     // it does not make bundle.js file physically ,,but it loads from memory ,,which make server fast
     devServer: {
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        historyApiFallback: true
     }
 }
 
