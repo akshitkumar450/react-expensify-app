@@ -21,7 +21,11 @@ const setCount = ({ count }) => ({
     count: count
 })
 
-const store = createStore((state = { count: 0 }, action) => {
+// reducers
+// 1 reducers are pure functions (fucntions that gives o/p only with the input)
+//  never change state and action
+
+const countReducer = (state = { count: 0 }, action) => {
     switch (action.type) {
         case 'INCREMENT':
             // const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1
@@ -45,7 +49,9 @@ const store = createStore((state = { count: 0 }, action) => {
             return state
     }
 
-})
+}
+
+const store = createStore(countReducer)
 
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
