@@ -1,19 +1,37 @@
 import { createStore } from 'redux';
 
-// redux state container
-// first arg is function for state (default state)
-// second arg is action
+// action generators that returns action object
+
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
+    type: 'INCREMENT',
+    incrementBy: incrementBy
+})
+
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+    type: 'DECREMENT',
+    decrementBy: decrementBy
+})
+
+const resetCount = () => ({
+    type: 'RESET'
+})
+
+const setCount = ({ count }) => ({
+    type: 'SET',
+    count: count
+})
+
 const store = createStore((state = { count: 0 }, action) => {
     switch (action.type) {
         case 'INCREMENT':
-            const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1
+            // const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1
             return {
-                count: state.count + incrementBy
+                count: state.count + action.incrementBy
             }
         case 'DECREMENT':
-            const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1
+            // const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1
             return {
-                count: state.count - decrementBy
+                count: state.count - action.decrementBy
             }
         case 'RESET':
             return {
@@ -29,48 +47,13 @@ const store = createStore((state = { count: 0 }, action) => {
 
 })
 
-// this fn get call every time store changes i.e(state changes)
-// basically used ro rerendering
-// it return a function when we want to stop the dispatch
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 })
 
-// to get current state object
-
-// actions are used to change the redux store(communicating with the store)
-// actions- are the objects that gets sent to the store
-
-// meaning full effect on the store
-store.dispatch({
-    type: 'INCREMENT',
-    // to give other information(can be access by action)
-    // to use dynamic actions
-    incrementBy: 5
-})
-
-store.dispatch({
-    type: 'INCREMENT'
-})
-
-// stop subscribtion
-// unsubscribe()
-
-store.dispatch({
-    type: 'RESET'
-})
-
-store.dispatch({
-    type: 'DECREMENT',
-    decrementBy: 5
-})
-store.dispatch({
-    type: 'INCREMENT',
-
-})
-
-store.dispatch({
-    type: 'SET',
-    count: 101
-})
-// console.log(store.getState());
+store.dispatch(incrementCount({ incrementBy: 5 }))
+store.dispatch(incrementCount())
+store.dispatch(resetCount())
+store.dispatch(decrementCount({ decrementBy: 5 }))
+store.dispatch(incrementCount())
+store.dispatch(setCount({ count: 100 }))
