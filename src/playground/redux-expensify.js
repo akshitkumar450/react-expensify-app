@@ -153,7 +153,17 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
 
         // if all three are true then we will put in the array else it will be filtered out
         return startDateMatch && endDateMatch && textMatch;
+    }).sort((a, b) => {
+        if (sortBy === 'date') {
+            return a.createdAt < b.createdAt ? 1 : -1
+        }
+
+        if (sortBy === 'amount') {
+            return a.amount < b.amount ? 1 : -1
+        }
     })
+
+    //the output of the return is an array.so we can use sort on it directly
 }
 
 // store
@@ -172,7 +182,7 @@ store.subscribe(() => {
 })
 
 // we get the action object back when we dispatch which can be used 
-const expenseOne = store.dispatch(addExpense({ des: 'Rent', amount: 100, createdAt: 1000 }))
+const expenseOne = store.dispatch(addExpense({ des: 'Rent', amount: 100, createdAt: -21000 }))
 const expenseTwo = store.dispatch(addExpense({ des: 'car', amount: 1080, createdAt: -1000 }))
 // console.log(expenseOne);
 
@@ -181,15 +191,15 @@ const expenseTwo = store.dispatch(addExpense({ des: 'car', amount: 1080, created
 // // console.log(removeOne);
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 4500 }))
 
-store.dispatch(setTextFilter('rent'));
+// store.dispatch(setTextFilter('rent'));
 // store.dispatch(setTextFilter());
 
 // store.dispatch(setByDate())
-// store.dispatch(setByAmount())
+store.dispatch(setByAmount())
 
-store.dispatch(setStartDate(0))
+// store.dispatch(setStartDate(0))
 // store.dispatch(setStartDate())
-store.dispatch(setEndDate(1225))
+// store.dispatch(setEndDate(1225))
 // store.dispatch(setEndDate())
 
 const demoState = {
