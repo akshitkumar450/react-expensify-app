@@ -2,5 +2,9 @@
     "presets": [
         "env",
        "react"
+    ],
+    // to use spread operator in objects
+    "plugins": [
+        "transform-object-rest-spread"
     ]
 }

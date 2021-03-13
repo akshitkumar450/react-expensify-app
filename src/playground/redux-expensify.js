@@ -22,6 +22,20 @@ const removeExpense = ({ id } = {}) => ({
     }
 })
 // edit_expense
+const editExpense = (id, updates) => ({
+    type: 'EDIT_EXPENSE',
+    expense: {
+        id,
+        updates
+    }
+})
+
+const setTextFilter = (text = '') => ({
+    type: 'SET_TEXT',
+    filter: {
+        text
+    }
+})
 // sortbydate
 // sortby amount
 // setstartdate
@@ -42,6 +56,21 @@ const expenseReducer = (state = expenseReducerDefaultState, action) => {
         case 'REMOVE_EXPENSE':
             return state.filter((item) => item.id !== action.expense.id)
 
+        case "EDIT_EXPENSE":
+            return state.map((item) => {
+                if (item.id === action.expense.id) {
+                    return {
+                        // it returns a new object with ->(using spread operator)
+                        //  to get the old object
+                        ...item,
+                        //  and to update the old value with the new given value
+                        ...action.expense.updates
+                    }
+                } else {
+                    return item
+                }
+            })
+
         default:
             return state
     }
@@ -58,6 +87,11 @@ const filterReducerDefaultState = {
 // filter reducer
 const filterReducer = (state = filterReducerDefaultState, action) => {
     switch (action.type) {
+        case 'SET_TEXT':
+            return {
+                ...state,
+                text: action.filter.text
+            }
         default:
             return state
     }
@@ -83,6 +117,10 @@ const expenseTwo = store.dispatch(addExpense({ des: 'car', amount: 1080 }))
 // remove an expense with the given id
 const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }))
 // console.log(removeOne);
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 4500 }))
+
+store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter());
 
 const demoState = {
     expenses: [
@@ -100,6 +138,3 @@ const demoState = {
         endDate: undefined
     }
 };
-
-
-
