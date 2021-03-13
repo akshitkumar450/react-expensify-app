@@ -23,7 +23,7 @@ const setCount = ({ count }) => ({
 
 // reducers
 // 1 reducers are pure functions (fucntions that gives o/p only with the input)
-//  never change state and action
+// 2 never change state and action
 
 const countReducer = (state = { count: 0 }, action) => {
     switch (action.type) {
