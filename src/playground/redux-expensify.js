@@ -141,6 +141,21 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
     }
 }
 
+// get the visible expenses(filtering expenses by filters)
+
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+    return expenses.filter((expense) => {
+        //  if startDate is undefined then it will return true ( not have effect)
+        const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+        const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+        // to filter by text
+        const textMatch = expense.des.toLowerCase().includes(text.toLowerCase());
+
+        // if all three are true then we will put in the array else it will be filtered out
+        return startDateMatch && endDateMatch && textMatch;
+    })
+}
+
 // store
 const store = createStore(
     combineReducers({
@@ -149,30 +164,33 @@ const store = createStore(
     })
 )
 
+//  for filtering expenses 
 store.subscribe(() => {
-    console.log(store.getState());
+    const state = store.getState()
+    const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
+    console.log(visibleExpenses);
 })
 
 // we get the action object back when we dispatch which can be used 
-const expenseOne = store.dispatch(addExpense({ des: 'rent', amount: 100 }))
-const expenseTwo = store.dispatch(addExpense({ des: 'car', amount: 1080 }))
+const expenseOne = store.dispatch(addExpense({ des: 'Rent', amount: 100, createdAt: 1000 }))
+const expenseTwo = store.dispatch(addExpense({ des: 'car', amount: 1080, createdAt: -1000 }))
 // console.log(expenseOne);
 
 // remove an expense with the given id
-const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }))
-// console.log(removeOne);
-store.dispatch(editExpense(expenseTwo.expense.id, { amount: 4500 }))
+// const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }))
+// // console.log(removeOne);
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 4500 }))
 
 store.dispatch(setTextFilter('rent'));
-store.dispatch(setTextFilter());
+// store.dispatch(setTextFilter());
 
-store.dispatch(setByDate())
-store.dispatch(setByAmount())
+// store.dispatch(setByDate())
+// store.dispatch(setByAmount())
 
-store.dispatch(setStartDate(125))
-store.dispatch(setStartDate())
-store.dispatch(setEndDate(225))
-store.dispatch(setEndDate())
+store.dispatch(setStartDate(0))
+// store.dispatch(setStartDate())
+store.dispatch(setEndDate(1225))
+// store.dispatch(setEndDate())
 
 const demoState = {
     expenses: [
