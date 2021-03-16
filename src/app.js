@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import AppRouter from './routers/AppRouter'
 import './styles/style.css'
 
+import { Provider } from 'react-redux'
+
 import configureStore from './store/configureStore';
 import { addExpense } from './actions/expenses'
 import { setTextFilter } from './actions/filters'
@@ -21,4 +23,13 @@ store.dispatch(addExpense({ des: 'Gas bill' }))
 store.dispatch(setTextFilter('bill'))
 store.dispatch(setTextFilter('water'))
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'))
+// provider is use to provide the store to all our components that make up our application
+// individual components can access the store
+// step -1
+const jsx = (
+    <Provider store={store}>
+        <AppRouter />
+    </Provider>
+)
+
+ReactDOM.render(jsx, document.getElementById('app'))
