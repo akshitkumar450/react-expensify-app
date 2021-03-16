@@ -21,6 +21,4 @@ store.dispatch(addExpense({ des: 'Gas bill' }))
 store.dispatch(setTextFilter('bill'))
 store.dispatch(setTextFilter('water'))
 
-// add expense
-
 ReactDOM.render(<AppRouter />, document.getElementById('app'))
