@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// step -2
+import { ExpenseListItem } from './ExpenseListItem'
+import getVisibleExpenses from '../selectors/expenses'
 
+// step -2
 // connect method is used to use the store (connect the component with store)
-//  using connect method we can use redux store without passing them as the props
+// using connect method we can use redux store without passing them as the props
 
 const ExpenseList = (props) => (
     <div>
         <h1> Expense List </h1>
-        {props.filters.text}
-        {props.expenses.length}
+        {props.expenses.map((item) => {
+            return <ExpenseListItem key={item.id} {...item} />
+        })}
     </div>
 )
 
@@ -21,8 +24,8 @@ const ExpenseList = (props) => (
 
 const mapStateToProps = (state) => {
     return {
-        expenses: state.expenses,
-        filters: state.filters
+        // to get the filtered date back
+        expenses: getVisibleExpenses(state.expenses, state.filters)
     }
 }
 
