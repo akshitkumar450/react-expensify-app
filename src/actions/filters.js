@@ -6,12 +6,12 @@ export const setTextFilter = (text = '') => ({
 })
 
 // sortbydate
-export const setByDate = () => ({
+export const sortByDate = () => ({
     type: 'SORT_BY_DATE'
 })
 
 // sortby amount
-export const setByAmount = () => ({
+export const sortByAmount = () => ({
     type: 'SORT_BY_AMOUNT'
 })
 

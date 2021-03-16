@@ -19,9 +19,8 @@ store.subscribe(() => {
 })
 
 store.dispatch(addExpense({ des: 'Water bill', amount: 45 }))
-store.dispatch(addExpense({ des: 'Gas bill' }))
-store.dispatch(setTextFilter('bill'))
-
+store.dispatch(addExpense({ des: 'Gas bill', createdAt: 1000 }))
+store.dispatch(addExpense({ des: 'Rent', amount: 109520 }))
 
 // provider is use to provide the store to all our components that make up our application
 // individual components can access the store
