@@ -19,13 +19,15 @@ class ExpenseForm extends React.Component {
         this.onAmountChange = this.onAmountChange.bind(this)
         this.onDateChange = this.onDateChange.bind(this)
         this.onFocusChange = this.onFocusChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
         // default states
         this.state = {
             description: '',
             note: '',
             amount: '',
             createdAt: moment(),
-            calendarFocused: false
+            calendarFocused: false,
+            error: ''
         }
     }
 
@@ -43,23 +45,46 @@ class ExpenseForm extends React.Component {
         const amount = e.target.value
         // we have use regular expression to let user to enter amount in specific format
         // 1000656.54 (only this type)
-        if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+        // (!amount) to delete the input value
+        if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
             this.setState(() => ({ amount: amount }))
         }
     }
 
     onDateChange(createdAt) {
-        this.setState(() => ({ createdAt: createdAt }))
+        if (createdAt) {
+            this.setState(() => ({ createdAt: createdAt }))
+        }
     }
 
     onFocusChange({ focused }) {
         this.setState(() => ({ calendarFocused: focused }))
     }
 
+    onSubmit(e) {
+        e.preventDefault()
+        if (!this.state.description || !this.state.amount) {
+            // set error state equal to provide des and amount
+            this.setState(() => ({ error: 'please provide description and amount' }))
+        } else {
+            // clear error 
+            this.setState(() => ({ error: '' }))
+
+            // when form get submitted all the data will be passed to AddExpensePage file
+            this.props.onSubmit({
+                des: this.state.description,
+                amount: parseFloat(this.state.amount, 10) * 100,
+                createdAt: this.state.createdAt.valueOf(),
+                note: this.state.note
+            })
+        }
+    }
+
     render() {
         return (
             <div>
-                <form>
+                {this.state.error && <p>{this.state.error}</p>}
+                <form onSubmit={this.onSubmit}>
                     <input
                         type='text'
                         placeholder='description'
