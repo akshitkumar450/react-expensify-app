@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { ExpenseListItem } from './ExpenseListItem'
+import ExpenseListItem from './ExpenseListItem'
 import getVisibleExpenses from '../selectors/expenses'
 
 // step -2
@@ -24,7 +24,7 @@ const ExpenseList = (props) => (
 
 const mapStateToProps = (state) => {
     return {
-        // to get the filtered date back
+        // to get the filtered data back
         expenses: getVisibleExpenses(state.expenses, state.filters)
     }
 }
