@@ -22,10 +22,10 @@ class ExpenseForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         // default states
         this.state = {
-            description: '',
-            note: '',
-            amount: '',
-            createdAt: moment(),
+            description: props.expense ? props.expense.des : '',
+            note: props.expense ? props.expense.note : '',
+            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
             calendarFocused: false,
             error: ''
         }
