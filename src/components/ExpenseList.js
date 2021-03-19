@@ -8,14 +8,27 @@ import getVisibleExpenses from '../selectors/expenses'
 // connect method is used to use the store (connect the component with store)
 // using connect method we can use redux store without passing them as the props
 
+
+// here item is an object of expenses,,so we can pass it as a props 
 const ExpenseList = (props) => (
     <div>
         <h1> Expense List </h1>
         {props.expenses.map((item) => {
-            return <ExpenseListItem key={item.id} {...item} />
+            return <ExpenseListItem key={item.id} expense={item} />
         })}
     </div>
 )
+
+// ALTERNATE TO DO
+
+// const ExpenseList = (props) => (
+//     <div>
+//         <h1> Expense List </h1>
+//         {props.expenses.map((item) => {
+//             return <ExpenseListItem key={item.id} {...item} />
+//         })}
+//     </div>
+// )
 
 //  state from the store
 //  it has expenses and filters object

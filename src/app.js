@@ -16,6 +16,7 @@ store.subscribe(() => {
     const state = store.getState()
     const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
     console.log(visibleExpenses);
+    // state is an object having expenses and filters
 })
 
 store.dispatch(addExpense({ des: 'Water bill', amount: 45 }))

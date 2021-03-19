@@ -5,9 +5,9 @@ import ExpenseForm from './ExpenseForm'
 
 const EditExpensePage = (props) => (
     <div>
-
         <p>id with {props.match.params.id}</p>
         <ExpenseForm
+            // props.expense will the matched object containing(des,amount,note,createdAt) in expenses array
             expense={props.expense}
             onSubmit={(expense) => {
                 // console.log('updates', expense);
@@ -24,7 +24,10 @@ const EditExpensePage = (props) => (
 
 const mapStateToProps = (state, props) => {
     return {
+        // expense will be the object with the matched id
+        // item will the expense object
         expense: state.expenses.find((item) => {
+            // to find by id in the expenses array
             return item.id === props.match.params.id
         })
     }

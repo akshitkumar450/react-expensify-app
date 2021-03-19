@@ -21,6 +21,7 @@ class ExpenseForm extends React.Component {
         this.onFocusChange = this.onFocusChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         // default states
+        // props.expense will come from editExpensePage component
         this.state = {
             description: props.expense ? props.expense.des : '',
             note: props.expense ? props.expense.note : '',

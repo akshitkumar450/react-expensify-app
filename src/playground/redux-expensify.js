@@ -177,8 +177,10 @@ const store = createStore(
 //  for filtering expenses 
 store.subscribe(() => {
     const state = store.getState()
-    const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
-    console.log(visibleExpenses);
+    // const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
+    // console.log(visibleExpenses);
+    // state is an object having expenses and filters
+    console.log(state);
 })
 
 // we get the action object back when we dispatch which can be used 
