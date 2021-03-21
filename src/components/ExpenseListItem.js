@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 // here expense is a props , which is a object of expenses
-const ExpenseListItem = ((props) => (
+export const ExpenseListItem = ((props) => (
     <div>
         <Link to={`/edit/${props.expense.id}`}>
             <h3>{props.expense.des}</h3>

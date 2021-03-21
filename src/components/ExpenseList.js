@@ -10,12 +10,20 @@ import getVisibleExpenses from '../selectors/expenses'
 
 
 // here item is an object of expenses,,so we can pass it as a props 
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => (
     <div>
         <h1> Expense List </h1>
-        {props.expenses.map((item) => {
-            return <ExpenseListItem key={item.id} expense={item} />
-        })}
+        {
+            props.expenses.length === 0 ? (
+                <p>no expense</p>
+            ) : (
+                props.expenses.map((item) => {
+                    return <ExpenseListItem key={item.id} expense={item} />
+                })
+            )
+        }
+
+
     </div>
 )
 
