@@ -1,32 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render header 1`] = `
-<div>
-  <h1>
-    Expensify App
-  </h1>
-  <NavLink
-    activeClassName="active"
-    exact={true}
-    to="/"
-  >
-    Home
-  </NavLink>
-  <NavLink
-    activeClassName="active"
-    to="/create"
-  >
-    Create
-  </NavLink>
-  <NavLink
-    activeClassName="active"
-    to="edit"
-  >
-    edit
-  </NavLink>
-</div>
-`;
-
 exports[`should render header correctly 1`] = `
 <div>
   <h1>
