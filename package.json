@@ -8,7 +8,9 @@
     "build:prod": "webpack -p --env production ",
     "devserver": "webpack-dev-server",
     "test": "jest --config=jest.config.json",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "author": "",
   "license": "ISC",
