@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build:prod": "webpack --watch",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production ",
     "devserver": "webpack-dev-server",
     "test": "jest --config=jest.config.json",
     "test:watch": "jest --watch"
