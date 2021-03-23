@@ -1,4 +1,6 @@
 const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const cssExtract = new ExtractTextPlugin('styles.css')
 
 module.exports = (env) => {
     const isProd = env === 'production'
@@ -24,13 +26,25 @@ module.exports = (env) => {
                 //  for loading css
                 {
                     test: /\.css$/,
-                    use: ["style-loader", "css-loader"],
+                    use: cssExtract.extract({
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    sourceMap: true
+                                }
+                            }
+                        ]
+                    })
                 }
             ]
         },
+        plugins: [
+            cssExtract
+        ],
         // sorce map --help for debugging-- it will reference to errors in the component file rather than bundle.js file
         // we have used different source map in dev and prod 
-        devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
+        devtool: isProd ? 'source-map' : 'inline-source-map',
 
         // a webpack dev server  such as live server
         // it does not make bundle.js file physically ,,but it loads from memory ,,which make server fast
