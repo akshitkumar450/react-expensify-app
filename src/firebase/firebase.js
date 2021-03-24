@@ -11,6 +11,35 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+// firebase does not support database in which we want to use it
+// push method generates a unique id 
+
+firebase.database().ref('expenses').push({
+    des: 'one des',
+    note: 'one note',
+    amaount: 1,
+    createdAt: 1
+})
+firebase.database().ref('expenses').push({
+    des: 'two des',
+    note: 'two note',
+    amaount: 2,
+    createdAt: 2
+})
+firebase.database().ref('expenses').push({
+    des: 'three des',
+    note: 'three note',
+    amaount: 3,
+    createdAt: 3
+})
+
+// firebase.database().ref('notes').push({
+//     title: 'course topics',
+//     body: 'react, angluar'
+// })
+
+// firebase.database().ref('notes/-MW_N9i6ybsznMolIjaI').remove()
 // in ref() is no arg is passed ,it means root of the database
 // firebase.database().ref().set({
 //     name: 'mead',
@@ -84,16 +113,16 @@ firebase.initializeApp(firebaseConfig);
 //     firebase.database().ref('age').set(51)
 // }, 10500)
 
-firebase.database().ref()
-    .on('value', (snapshot) => {
-        const val = snapshot.val();
-        console.log(val);
-        console.log(`${val.name} is a ${val.job} in city ${val.location.city}`);
-    })
+// firebase.database().ref()
+//     .on('value', (snapshot) => {
+//         const val = snapshot.val();
+//         console.log(val);
+//         console.log(`${val.name} is a ${val.job} in city ${val.location.city}`);
+//     })
 
-setTimeout(() => {
-    firebase.database().ref('name').set('sara')
-}, 2000)
+// setTimeout(() => {
+//     firebase.database().ref('name').set('sara')
+// }, 2000)
 
 
 export default firebase
