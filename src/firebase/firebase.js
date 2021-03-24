@@ -11,10 +11,22 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
+// in ref() is no arg is passed ,it means root of the database
 firebase.database().ref().set({
-    name: 'mead'
+    name: 'mead',
+    age: 23,
+    isSingle: true,
+    location: {
+        city: 'philedalphia'
+    }
 })
-
+// this will only update age 
+firebase.database().ref('age').set(53)
+// this will change city in location
+firebase.database().ref('location/city').set('new york')
+// this will add new field attributes and set the values
+firebase.database().ref('attributes').set({
+    height: 6,
+    weight: 40
+})
 export default firebase
