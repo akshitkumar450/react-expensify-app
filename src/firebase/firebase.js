@@ -12,29 +12,23 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 // in ref() is no arg is passed ,it means root of the database
-firebase.database().ref().set({
-    name: 'mead',
-    age: 23,
-    isSingle: true,
-    location: {
-        city: 'philedalphia'
-    }
-}).then(() => {
-    console.log('data is saved');
-}).catch((error) => {
-    console.log('error in saving data ', error);
-})
-// this will only update age 
-firebase.database().ref('age').set(53)
-// this will change city in location
-firebase.database().ref('location/city').set('new york')
-// this will add new field attributes and set the values
-firebase.database().ref('attributes').set({
-    height: 6,
-    weight: 40
-}).then(() => {
-    console.log('data saved');
-}).catch((error) => {
-    console.log('error in saving data');
-})
+// firebase.database().ref().set({
+//     name: 'mead',
+//     age: 23,
+//     isSingle: true,
+//     location: {
+//         city: 'philedalphia'
+//     }
+// }).then(() => {
+//     console.log('data is saved');
+// }).catch((error) => {
+//     console.log('error in saving data ', error);
+// })
+
+firebase.database().ref('isSingle').remove()
+    .then(() => {
+        console.log('data removed');
+    }).catch((error) => {
+        console.log('error in removing data', error);
+    })
 export default firebase
