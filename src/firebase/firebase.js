@@ -19,6 +19,10 @@ firebase.database().ref().set({
     location: {
         city: 'philedalphia'
     }
+}).then(() => {
+    console.log('data is saved');
+}).catch((error) => {
+    console.log('error in saving data ', error);
 })
 // this will only update age 
 firebase.database().ref('age').set(53)
@@ -28,5 +32,9 @@ firebase.database().ref('location/city').set('new york')
 firebase.database().ref('attributes').set({
     height: 6,
     weight: 40
+}).then(() => {
+    console.log('data saved');
+}).catch((error) => {
+    console.log('error in saving data');
 })
 export default firebase
