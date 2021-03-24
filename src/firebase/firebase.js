@@ -12,27 +12,85 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// child_removed-> this will run when data is removed 
+firebase.database().ref('expenses').on('child_removed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+})
+
+// child_changes -> runs when data changes
+firebase.database().ref('expenses').on('child_changed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+})
+
+// child_added -> will run for both for the  existing data and for new data added
+firebase.database().ref('expenses').on('child_added', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+})
+
 // firebase does not support database in which we want to use it
 // push method generates a unique id 
 
-firebase.database().ref('expenses').push({
-    des: 'one des',
-    note: 'one note',
-    amaount: 1,
-    createdAt: 1
-})
-firebase.database().ref('expenses').push({
-    des: 'two des',
-    note: 'two note',
-    amaount: 2,
-    createdAt: 2
-})
-firebase.database().ref('expenses').push({
-    des: 'three des',
-    note: 'three note',
-    amaount: 3,
-    createdAt: 3
-})
+// firebase.database().ref('expenses').push({
+//     des: 'one des',
+//     note: 'one note',
+//     amaount: 1,
+//     createdAt: 1
+// })
+// firebase.database().ref('expenses').push({
+//     des: 'two des',
+//     note: 'two note',
+//     amaount: 2,
+//     createdAt: 2
+// })
+// firebase.database().ref('expenses').push({
+//     des: 'three des',
+//     note: 'three note',
+//     amaount: 3,
+//     createdAt: 3
+// })
+
+// fetching data from the array
+
+// firebase.database().ref('expenses')
+//     .once('value')
+//     .then((snapshot) => {
+//         const expenses = []
+//         snapshot.forEach((childSnapshot) => {
+//             expenses.push({
+//    // key gives the id
+//                 id: childSnapshot.key,
+//                 ...childSnapshot.val()
+//             })
+//         })
+//         console.log(expenses);
+//     })
+
+// on method does not support promises
+// firebase.database().ref('expenses')
+//     .on('value', (snapshot) => {
+//         const expenses = []
+//         snapshot.forEach((childSnapshot) => {
+//             expenses.push({
+//                 id: childSnapshot.key,
+//                 ...childSnapshot.val()
+//             })
+//         })
+//         console.log(expenses);
+//     })
+
+// setTimeout(() => {
+//     firebase.database().ref('expenses/-MW_PgMx2W_ls4diQ_3m').update({
+//         amount: 10,
+//         des: 'updated one'
+//     })
+// }, 2000)
+
+// setTimeout(() => {
+//     firebase.database().ref('expenses/-MW_PgMx2W_ls4diQ_3m').update({
+//         amount: 10,
+//         des: 'updated twice one'
+//     })
+// }, 5000)
 
 // firebase.database().ref('notes').push({
 //     title: 'course topics',
