@@ -7,7 +7,7 @@
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production ",
     "devserver": "webpack-dev-server",
-    "test": "jest --config=jest.config.json",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "test:watch": "jest --watch",
     "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod"
@@ -50,5 +50,9 @@
     "validator": "^8.0.0",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.11.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0"
   }
 }
