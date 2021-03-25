@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses'
 import { setTextFilter } from './actions/filters'
 import getVisibleExpenses from './selectors/expenses'
-import './firebase/firebase'
+import firebase from './firebase/firebase'
 
 const store = configureStore()
 
@@ -29,5 +29,15 @@ const jsx = (
         <AppRouter />
     </Provider>
 )
+
+// run when authenicate state is changed
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log('logged in');
+    }
+    else {
+        console.log('logges out');
+    }
+})
 
 ReactDOM.render(jsx, document.getElementById('app'))

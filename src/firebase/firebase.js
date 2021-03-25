@@ -12,6 +12,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+
 // // child_removed-> this will run when data is removed 
 // firebase.database().ref('expenses').on('child_removed', (snapshot) => {
 //     console.log(snapshot.key, snapshot.val());
