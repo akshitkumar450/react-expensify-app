@@ -12,20 +12,20 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// child_removed-> this will run when data is removed 
-firebase.database().ref('expenses').on('child_removed', (snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-})
+// // child_removed-> this will run when data is removed 
+// firebase.database().ref('expenses').on('child_removed', (snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// })
 
-// child_changes -> runs when data changes
-firebase.database().ref('expenses').on('child_changed', (snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-})
+// // child_changes -> runs when data changes
+// firebase.database().ref('expenses').on('child_changed', (snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// })
 
-// child_added -> will run for both for the  existing data and for new data added
-firebase.database().ref('expenses').on('child_added', (snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-})
+// // child_added -> will run for both for the  existing data and for new data added
+// firebase.database().ref('expenses').on('child_added', (snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// })
 
 // firebase does not support database in which we want to use it
 // push method generates a unique id 
