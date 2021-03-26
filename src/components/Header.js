@@ -8,9 +8,9 @@ import { connect } from 'react-redux'
 const Header = (props) => (
     <div>
         <h1>Expensify App</h1>
-        <NavLink to='/dashboard' activeClassName='active' exact={true}>Home</NavLink>
+        <NavLink to='/dashboard' activeClassName='active'>Home</NavLink>
         <NavLink to='/create' activeClassName='active'>Create</NavLink>
-        <NavLink to='edit' activeClassName='active'>edit</NavLink>
+        <NavLink to='/edit' activeClassName='active'>edit</NavLink>
 
         <button onClick={props.dispatch(startLogout)}>logout</button>
     </div>
